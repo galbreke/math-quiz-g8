@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مراجعة الرياضيات – الصف الثاني متوسط</title>
+
+<style>
+:root{--p:#4f46e5;--g:#16a34a;--r:#dc2626;--bg:#eef2ff}
+*{box-sizing:border-box}body{margin:0;font-family:'Tajawal',Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#eef2ff,#f0fdfa);min-height:100vh;color:#1e293b}
+.wrap{max-width:720px;margin:auto;padding:16px}
+header{text-align:center;padding:10px 0}header h1{font-size:1.4rem;margin:.3em 0;color:var(--p)}
+.bar{background:#e2e8f0;border-radius:99px;height:12px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#14b8a6);width:0;transition:.4s}
+.meta{display:flex;justify-content:space-between;margin:8px 2px;font-weight:700;font-size:.95rem}
+.card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 10px 30px #4f46e51a;animation:in .35s}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.tag{display:inline-block;background:#e0e7ff;color:var(--p);padding:4px 12px;border-radius:99px;font-size:.85rem;font-weight:700}
+h2{font-size:1.25rem;line-height:1.8}.intro p,.intro li{line-height:2;font-size:1.05rem}.ex{background:#f0fdfa;border-right:4px solid #14b8a6;padding:10px 14px;border-radius:10px;line-height:2}
+button{font-family:inherit;cursor:pointer}
+.btn{background:var(--p);color:#fff;border:0;border-radius:14px;padding:13px 24px;font-size:1.05rem;font-weight:700;width:100%;margin-top:14px}.btn:hover{filter:brightness(1.1)}
+.opt{display:block;width:100%;text-align:right;background:#f8fafc;border:2px solid #e2e8f0;border-radius:14px;padding:13px 16px;margin:9px 0;font-size:1.1rem;transition:.2s}
+.opt:hover:not(:disabled){border-color:var(--p);background:#eef2ff}
+.opt:disabled{color:#1e293b;opacity:1;cursor:default}
+.opt.ok{border-color:var(--g);background:#dcfce7}.opt.no{border-color:var(--r);background:#fee2e2}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;line-height:1.9}.fb.ok{background:#dcfce7;color:#14532d}.fb.no{background:#fee2e2;color:#7f1d1d}
+.m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:700}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.1;margin:0 2px}.fr span:first-child{border-bottom:1.5px solid currentColor}
+.big{font-size:3rem;font-weight:800;color:var(--p);text-align:center}.rev{border-bottom:1px solid #e2e8f0;padding:10px 0;line-height:1.8}
+svg{max-width:100%}
+</style></head><body><div class="wrap">
+<header><h1>مراجعة الرياضيات: الأعداد النسبية والحقيقية ونظرية فيثاغورس</h1><div>الصف الثاني متوسط</div></header>
+<div class="bar"><i id="bar"></i></div><div class="meta"><span id="pos"></span><span id="sc"></span></div>
+<main id="app"><noscript><div class="card"><h2>⚠️ هذا الملف يحتاج تشغيل JavaScript. افتحه في متصفح (Chrome أو Safari) وليس في معاينة الملفات.</h2></div></noscript></main></div>
+<script>
+// [ك/م] كسر، [ص ك/م] عدد كسري
+function F(s){return s.replace(/\[(-?\d+ )?(\d+)\/(\d+)\]/g,function(_,w,a,b){return '<span class="m">'+(w?w.trim()+' ':'')+'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span></span>';}).replace(/\{([^}]*)\}/g,'<span class="m">$1</span>');}
+var Q=[
+{t:"الأسس",i:"<p>القوة (الأس) طريقة مختصرة لكتابة ضرب العدد في نفسه عدة مرات.</p><div class='ex'>{10⁴}: العدد 10 هو <b>الأساس</b>، و4 هو <b>الأس</b> = عدد مرات تكرار ضرب 10 في نفسه.<br>مثال: {2³ = 2×2×2 = 8}</div>",q:"{10⁴} تُكتب كحاصل ضرب العدد في نفسه على الصورة:",o:["{4×10}","{10×10×10×10}","{10+10+10+10}","{4×4×4×4×4×4×4×4×4×4}"],a:1,e:"الأساس 10 يُضرب في نفسه 4 مرات (عدد مرات = الأس)."},
+{t:"ضرب الكسور (تطبيق)",i:"<p>لإيجاد جزء من كمية، نضرب الكسر في الكمية.</p><div class='ex'>[3/4] من 40 = [3/4] × 40 = 30</div>",q:"قالب شوكولاتة يحتوي على 230 سعرًا حراريًا، و[7/8] منها من الدهون. كم سعرًا حراريًا مصدره الدهون؟",o:["[102 1/4]","[28 3/4]","[201 1/4]","230"],a:2,e:"{230 × 7 ÷ 8 = 1610 ÷ 8 = 201.25} أي [201 1/4] سعر حراري."},
+{t:"ضرب الأعداد الكسرية",i:"<p>لضرب عدد كسري: حوّله أولًا إلى كسر غير فعلي، ثم اضرب البسط في البسط والمقام في المقام.</p><div class='ex'>[2 1/2] = [5/2]  (لأن 2×2+1=5)</div>",q:"تتطلب الكعكة [2 1/2] كوب طحين. إذا أرادت سيدة عمل [3/4] الخليط، فكم كوبًا تحتاج؟",o:["[2 3/8]","[6/8]","[7/8]","[1 7/8]"],a:3,e:"[5/2] × [3/4] = [15/8] = [1 7/8] كوب."},
+{t:"ضرب الكسور والتبسيط",i:"<p>عند ضرب كسرين: بسط × بسط، ومقام × مقام، ثم نبسّط بالقسمة على العامل المشترك. وإشارة سالب × موجب = سالب.</p>",q:"ناتج الضرب في أبسط صورة: [-2/9] × [3/8]",o:["[-1/12]","[-4/12]","[5/12]","[1/12]"],a:0,e:"{−2×3 = −6} و {9×8 = 72}، و [-6/72] = [-1/12] بالقسمة على 6."},
+{t:"النظير الضربي",i:"<p>النظير الضربي لعدد هو العدد الذي حاصل ضربه فيه = 1، ونحصل عليه بقلب الكسر (تبديل البسط والمقام) مع بقاء الإشارة.</p><div class='ex'>العدد الكسري نحوّله لكسر أولًا: [2 4/7] = [18/7]</div>",q:"النظير الضربي للعدد [-2 4/7] هو:",o:["[2 4/7]","[-2 7/4]","[-7/18]","[-18/7]"],a:2,e:"[-2 4/7] = [-18/7]، وبقلبه نحصل على [-7/18]."},
+{t:"قسمة الكسور",i:"<p>لمعرفة كم مرة تتكرر كمية داخل أخرى نستخدم القسمة. وقسمة الكسور = الضرب في النظير الضربي للمقسوم عليه.</p>",q:"كيس تربة به [8 1/4] كجم، كم وعاءً يملأ إذا كانت سعة الوعاء [3/4] كجم؟",o:["4","8","11","33"],a:2,e:"[33/4] ÷ [3/4] = [33/4] × [4/3] = 11 وعاء."},
+{t:"طرح الأعداد الكسرية",i:"<p>عند طرح عدد كسري من عدد كلي، نستلف 1 من العدد الكلي ونحوّله إلى كسر بنفس المقام.</p><div class='ex'>8 = [7 9/9]</div>",q:"احسب ناتج {8 −} [6 2/9] في أبسط صورة.",o:["[2 2/9]","[1 7/9]","[2 7/9]","[1 2/9]"],a:1,e:"[7 9/9] − [6 2/9] = [1 7/9]."},
+{t:"طرح الأعداد الكسرية بمقامات مختلفة",i:"<p>لطرح كسرين مقاماهما مختلفان نوحّد المقامات أولًا (المضاعف المشترك الأصغر)، وإذا كان الكسر الأول أصغر نستلف 1.</p>",q:"أرنب كتلته [4 5/6] كجم وآخر [5 1/2] كجم. كم تزيد كتلة الثاني على الأول؟",o:["[2/3] كجم","[1 1/3] كجم","[9 6/8] كجم","[10 1/3] كجم"],a:0,e:"[5 3/6] − [4 5/6] = [4 9/6] − [4 5/6] = [4/6] = [2/3] كجم."},
+{t:"محيط المستطيل",i:"<p>محيط المستطيل = 2 × (الطول + العرض). إذا عرفنا المحيط والعرض: الطول = (المحيط − 2×العرض) ÷ 2.</p>",q:"سياج حول حديقة مستطيلة طوله [45 3/4] م، وعرض الحديقة [10 1/2] م. فما طولها؟",o:["[12 3/8] م","[24 3/4] م","[17 1/2] م","[35 1/4] م"],a:0,e:"[45 3/4] − 21 = [24 3/4]، ثم ÷ 2 = [12 3/8] م."},
+{t:"الأسس في الحياة",i:"<p>عندما تتضاعف كمية (×2) عدة مرات، يكون الناتج {2ⁿ} حيث n عدد مرات التضاعف.</p><div class='ex'>كل 15 دقيقة مرة → في الساعة 4 مرات.</div>",q:"بكتيريا تنقسم إلى اثنتين كل 15 دقيقة، فكم سيصبح عدد الواحدة بعد 3 ساعات؟",o:["1024","2056","3084","4096"],a:3,e:"3 ساعات = 12 مرة انقسام، و {2¹² = 4096}."},
+{t:"الصيغة العلمية",i:"<p>الصيغة العلمية: عدد بين 1 و 10 مضروبًا في قوة للعدد 10. للأعداد الكبيرة يكون الأس موجبًا ويساوي عدد المنازل التي تحركت فيها الفاصلة لليسار.</p>",q:"عدد سكان عرعر 191000 نسمة. اكتبه بالصيغة العلمية.",o:["{1.91 × 10⁵}","{1.91 × 10⁻⁵}","{19.1 × 10⁵}","{19.1 × 10⁶}"],a:0,e:"نحرك الفاصلة 5 منازل: {191000 = 1.91 × 10⁵}. (19.1 ليس بين 1 و 10)."},
+{t:"الصيغة القياسية",i:"<p>الأس السالب يعني عددًا صغيرًا: نحرك الفاصلة لليسار بعدد الأس.</p><div class='ex'>{3 × 10⁻² = 0.03}</div>",q:"اكتب العدد {6.1 × 10⁻²} بالصيغة القياسية.",o:["61","0.61","0.061","610"],a:2,e:"نحرك الفاصلة منزلتين لليسار: {0.061}."},
+{t:"الصيغة العلمية",i:"<p>المليون = 1000000 أي 1 متبوع بـ 6 أصفار.</p>",q:"العدد مليون نعبر عنه بالصيغة العلمية:",o:["{1 × 10⁶}","{1 × 10³}","{1 × 10⁻³}","{1 × 10⁻⁶}"],a:0,e:"6 أصفار → {10⁶}."},
+{t:"حل المعادلات",i:"<p>لحل معادلة نعزل المجهول بالعملية العكسية: إذا كان مضافًا إليه عدد، نطرح هذا العدد من الطرفين.</p>",q:"حل المعادلة: {72 = 8 + س}",o:["9","17","64","80"],a:2,e:"{س = 72 − 8 = 64}."},
+{t:"الجذور التربيعية",i:"<p>الجذر التربيعي والتربيع عمليتان عكسيتان. إذا كان {√ص = 5} نربّع الطرفين.</p>",q:"حل المعادلة: {√ص = 5}",o:["5","-5","25","-25"],a:2,e:"{ص = 5² = 25}."},
+{t:"المربع الكامل",i:"<p>المربع الكامل: عدد هو ناتج ضرب عدد كلي في نفسه، مثل {1, 4, 9, 16, 25, 36, 49...}</p>",q:"أي الأعداد التالية مربع كامل؟",o:["2","13","16","7"],a:2,e:"{16 = 4 × 4}، أما 2 و13 و7 فليست مربعات كاملة."},
+{t:"الوسط الهندسي",i:"<p>الوسط الهندسي للعددين الموجبين أ و ب هو {√(أ×ب)}.</p><div class='ex'>نقدّر الجذر بإيجاد أقرب مربع كامل.</div>",q:"قدّر الوسط الهندسي للعددين 5 و 10 إلى أقرب عدد كلي.",o:["5","7","12","15"],a:1,e:"{√(5×10) = √50}، و50 قريب من 49 فالجواب ≈ 7."},
+{t:"تقدير الجذور",i:"<p>مساحة مثلث قاعدته = ارتفاعه = ق تُعطى بالعلاقة {م = ½ ق²}. لإيجاد ق نعوض ثم نقدّر الجذر التربيعي.</p>",q:"قدّر طول قاعدة مثلث من هذا النوع مساحته 17 م².",o:["4 م","5 م","6 م","7 م"],a:2,e:"{ق² = 34} و {√34} قريب من {√36 = 6}، إذن ≈ 6 م."},
+{t:"الأعداد غير النسبية",i:"<p>العدد النسبي يمكن كتابته على صورة كسر [أ/ب]. العدد غير النسبي لا يمكن ذلك، مثل جذر عدد ليس مربعًا كاملًا.</p>",q:"أي الأعداد التالية عدد غير نسبي؟",o:["[3/7]","{−5}","{√16}","{√6}"],a:3,e:"{√6} ليس مربعًا كاملًا فهو غير نسبي، بينما {√16 = 4}."},
+{t:"صح أم خطأ: الأعداد النسبية",i:"<p>كل عدد صحيح (موجب أو سالب) نسبي، لأنه يُكتب على صورة كسر مقامه 1.</p>",q:"العبارة: «العدد {−3} هو عدد نسبي».",o:["صح","خطأ"],a:0,e:"{−3 = −3/1} فهو نسبي."},
+{t:"صح أم خطأ: مقارنة الجذور",i:"<p>لمقارنة جذر بعدد، نربّع العدد: {10 = √100}.</p>",q:"العبارة: «{√94 > 10}».",o:["صح","خطأ"],a:1,e:"{94 < 100} إذن {√94 < 10}، والعبارة خطأ."},
+{t:"المثلث القائم",i:"<p>في المثلث القائم الزاوية: الضلع المقابل للزاوية القائمة يسمى <b>الوتر</b>، وهو أطول الأضلاع.</p>",q:"أكبر ضلع في المثلث القائم الزاوية يسمى:",o:["الوتر","الساق","القاعدة","الارتفاع"],a:0,e:"الوتر هو أطول أضلاع المثلث القائم."},
+{t:"تعريف العدد غير النسبي",i:"<p>تذكّر: النسبي = يُكتب بسطًا ومقامًا، وغير النسبي = لا يُكتب كذلك.</p>",q:"العدد الذي لا يمكن كتابته على صورة بسط ومقام هو:",o:["عدد غير نسبي","عدد نسبي","عدد صحيح","عدد كلي"],a:0,e:"هذا هو تعريف العدد غير النسبي."},
+{t:"جمع الأعداد الصحيحة",i:"<p>جمع عدد سالب = طرحه: {25 + (−8) = 25 − 8}.</p>",q:"{25 + (−8) =}",o:["33","17","-17","-33"],a:1,e:"{25 − 8 = 17}."},
+{t:"جمع الكسور",i:"<p>لجمع كسرين لهما المقام نفسه نجمع البسطين ونُبقي المقام، ثم نبسّط.</p>",q:"ناتج جمع [5/9] + [7/9] في أبسط صورة:",o:["[12/18]","[1 1/3]","[1 3/9]","[2/3]"],a:1,e:"[12/9] = [1 3/9] = [1 1/3] (في أبسط صورة)."},
+{t:"الأنماط",i:"<p>في النمط الذي يزيد بمقدار ثابت: الحد رقم n = الحد الأول + (n − 1) × مقدار الزيادة.</p>",q:"مسرح: الصف الأول 12 مقعدًا، الثاني 17، الثالث 22... كم مقعدًا في الصف التاسع؟",o:["45","47","52","57"],a:2,e:"الزيادة 5: {12 + 8 × 5 = 52} مقعدًا."},
+{t:"الصيغة القياسية",i:"<p>الأس الموجب: نحرك الفاصلة لليمين بعدد الأس ونضيف أصفارًا.</p>",q:"سرعة الضوء تقريبًا {1.86 × 10⁵} ميل في الثانية. بالصيغة القياسية:",o:["18600","186000","1860000","0.0000186"],a:1,e:"نحرك الفاصلة 5 منازل لليمين: 186000."},
+{t:"الجذر والتربيع",i:"<p>التربيع والجذر عمليتان عكسيتان، فـ {(√أ)² = أ}.</p>",q:"قيمة {(√36)²} =",o:["6","36","72","1296"],a:1,e:"{√36 = 6} و {6² = 36}."},
+{t:"نظرية فيثاغورس (إيجاد ساق)",i:"<p>في المثلث القائم: {الوتر² = ساق² + ساق²}. لإيجاد ساق: {ساق² = الوتر² − الساق الأخرى²}.</p><svg viewBox='0 0 200 120' width='200'><polygon points='20,110 150,110 150,10' fill='#eef2ff' stroke='#4f46e5' stroke-width='2'/><rect x='140' y='100' width='10' height='10' fill='none' stroke='#4f46e5'/><text x='60' y='55' font-size='13'>20 سم</text><text x='155' y='65' font-size='13'>15 سم</text><text x='85' y='122' font-size='13'>ب</text></svg>",q:"طول الضلع المجهول ب في مثلث قائم وتره 20 سم وأحد ساقيه 15 سم، مقرّبًا إلى أقرب عُشر:",o:["5 سم","13.2 سم","17.5 سم","25 سم"],a:1,e:"{ب² = 400 − 225 = 175} و {√175 ≈ 13.2} سم."},
+{t:"نظرية فيثاغورس (إيجاد الوتر)",i:"<p>لإيجاد الوتر: {ج² = أ² + ب²} ثم نأخذ الجذر التربيعي.</p><svg viewBox='0 0 200 120' width='200'><polygon points='30,10 30,110 180,110' fill='#f0fdfa' stroke='#14b8a6' stroke-width='2'/><rect x='30' y='100' width='10' height='10' fill='none' stroke='#14b8a6'/><text x='0' y='65' font-size='13'>24</text><text x='95' y='122' font-size='13'>32 سم</text><text x='110' y='55' font-size='13'>ج</text></svg>",q:"طول الوتر ج في مثلث قائم ساقاه 24 سم و 32 سم:",o:["40 سم","56 سم","28 سم","1600 سم"],a:0,e:"{ج² = 576 + 1024 = 1600} و {√1600 = 40} سم."}
+];
+var i=0,score=0,ans=[],app=document.getElementById('app');
+function hdr(){document.getElementById('bar').style.width=(i/Q.length*100)+'%';document.getElementById('pos').textContent=i<Q.length?'السؤال '+(i+1)+' من '+Q.length:'انتهى الاختبار';document.getElementById('sc').textContent='⭐ النقاط: '+score;}
+function intro(){hdr();var q=Q[i];app.innerHTML='<div class="card intro"><span class="tag">💡 فكرة السؤال: '+q.t+'</span>'+F(q.i)+'<button class="btn" id="go">فهمت، اختبرني</button></div>';document.getElementById('go').onclick=ask;window.scrollTo(0,0);}
+function ask(){var q=Q[i];var h='<div class="card"><span class="tag">❓ '+q.t+'</span><h2>'+F(q.q)+'</h2>';for(var k=0;k<q.o.length;k++){var o=q.o[k];h+='<button class="opt" data-k="'+k+'">'+'أبجدهـ'.charAt(k)+') '+F(o)+'</button>';}app.innerHTML=h+'<div id="fb"></div></div>';
+var bs=app.querySelectorAll('.opt');for(var j=0;j<bs.length;j++){bs[j].onclick=function(){pick(parseInt(this.getAttribute('data-k'),10))};}}
+function pick(k){var q=Q[i],bs=app.querySelectorAll('.opt'),ok=k===q.a;for(var j=0;j<bs.length;j++)bs[j].disabled=true;bs[q.a].classList.add('ok');if(!ok)bs[k].classList.add('no');if(ok)score++;ans.push(k);hdr();
+document.getElementById('fb').innerHTML='<div class="fb '+(ok?'ok':'no')+'"><b>'+(ok?'✅ إجابة صحيحة! أحسنت':'❌ إجابة خاطئة')+'</b><br>'+F(q.e)+'</div><button class="btn" id="nx">'+(i<Q.length-1?'السؤال التالي ←':'عرض النتيجة 🏁')+'</button>';document.getElementById('nx').onclick=nxt;}
+function nxt(){i++;i<Q.length?intro():done();}
+function done(){hdr();var p=Math.round(score/Q.length*100),msg=p>=90?'ممتاز! 🏆':p>=70?'جيد جدًا 👏':p>=50?'جيد، راجع الأخطاء 📘':'تحتاج إلى مراجعة أكثر 💪';
+var h='<div class="card"><div class="big">'+score+' / '+Q.length+'</div><h2 style="text-align:center">'+p+'% — '+msg+'</h2><h3>مراجعة الإجابات</h3>';
+for(var n=0;n<Q.length;n++){var q=Q[n];var ok=ans[n]===q.a;h+='<div class="rev">'+(ok?'✅':'❌')+' <b>'+(n+1)+'.</b> '+F(q.q)+'<br>إجابتك: '+F(q.o[ans[n]])+(ok?'':' — الصحيحة: <b>'+F(q.o[q.a])+'</b>')+'</div>';}
+app.innerHTML=h+'<button class="btn" id="rs">🔄 إعادة الاختبار</button></div>';document.getElementById('rs').onclick=restart;window.scrollTo(0,0);}
+function restart(){i=0;score=0;ans=[];intro();}
+window.onerror=function(m,u,l){app.innerHTML='<div class="card">خطأ: '+m+' (سطر '+l+')</div>';};
+try{intro();}catch(e){app.innerHTML='<div class="card">خطأ: '+e.message+'</div>';}
+(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap';document.head.appendChild(l);})();
+</script></body></html>
